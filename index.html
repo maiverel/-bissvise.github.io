@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твой первый бизнес</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #A75FCE;
+/*
+            padding-left: 20px;
+            padding-right: 20px;
+*/
+        }
+        
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+            display: none; /* Скрыт изначально */
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #modal {
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        #modal img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            
+            background-color: #000000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            
+            border-radius: 10px;
+            width: 200px;
+            height: 60px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        #menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu ul li {
+            margin-bottom: 10px;
+        }
+
+        #menu ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .intro {
+            text-align: center;
+            margin: 17px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            color: #FFFFFF
+        }
+
+/*
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+*/
+
+        .carousel {
+            margin: 30px 0;
+        }
+
+        .carousel-images {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-images img {
+            width: 700px;
+            height: 350px;
+            scroll-snap-align: center;
+            margin-right: 0px;
+        }
+        
+        .advice {
+            display: flex;
+            align-items: flex-start;
+            
+            margin: 17px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            color: #FFFFFF
+;
+/*
+            text-align: center;
+            
+            align-items: center;
+            padding: 50px;
+*/
+        }
+        
+        .line {
+            border-left: 3px solid white; /* Вертикальная линия слева */
+            height: 100%; /* Высота линии */
+            margin-right: 10px; /* Отступ между линией и текстом */
+        }
+        
+        .text {
+            padding-left: 10px;
+        }
+
+/*
+        .advice .line {
+            width: 4px;
+            height: 100%;
+            background-color: #007BFF;
+            margin-right: 20px;
+        }
+*/
+
+        .cta-box {
+            background-color: lightblue;
+            padding: 50px;
+            text-align: center;
+            margin-left: 120px;
+            margin-right: 120px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .strawberry-section {
+            position: relative;
+        }
+
+        .strawberry {
+            position: absolute;
+            top: 200px;
+            left: 710px;
+            transform: rotate(-37deg);
+            width: 200px;
+        }
+
+        .subscription {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .subscription-btn {
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .subscription-btn.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .cards-stack {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cards-stack .card {
+            background-color: lightblue;
+            width: 200px;
+            height: 100px;
+            margin-bottom: 20px;
+            position: absolute;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonials {
+            margin: 50px;
+        }
+
+        .testimonial {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-photo {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .contact {
+            text-align: center;
+            margin: 50px;
+        }
+        
+        #catImage {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Меню-гамбургер -->
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#success">Насколько успешен мой бизнес</a></li>
+                <li><a href="#legal">Юридические консультации</a></li>
+                <li><a href="#grants">Помощь с подачей на гранты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="intro">
+            <h1>BissVise</h1>
+            <p>Мы помогаем начинающим предпринимателям достичь успеха. Получите юридические консультации и поддержку в подаче заявок на гранты.</p>
+        </section>
+        
+        <section class="intro">
+            <button id="openModalBtn">Перейти в бот!</button>
+        </section>
+        
+        <div id="overlay">
+            <div id="modal">
+                <p>Отсканируй или кликни на QR-код!</p>
+                <a href="https://t.me/BusinessAnalyticsSuccessBot" target="_blank"><img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 16.22.16.jpeg" alt="Котик"></a>
+            </div>
+        </div>
+
+
+        <!-- Карусель -->
+        <section class="carousel">
+            <div class="carousel-images">
+                <img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 16.15.12.jpeg" alt="Кот 1">
+                <img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 23.33.43.jpeg" alt="Кот 2">
+                <img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 16.15.09.jpeg" alt="Кот 3">
+                <img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 23.33.30.jpeg" alt="Кот 4">
+                <img src="/Users/ekaterinavasileva/Downloads/photo_2024-10-27 16.15.14.jpeg" alt="Кот 5">
+            </div>
+        </section>
+        
+        <section class="intro">
+            <h1>Мы...</h1>
+        </section>
+
+        <!-- Советы -->
+        <section class="advice">
+            <div class="line">
+                <div class="text">
+                    <h2>На Искуственном Интелекте</h2>
+                    <p>Проконсультируем по Юридическим Вопросам. Расскажем какие документы заполнить, а также ответим на вопросы по законам РФ. </p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="advice">
+            <div class="text">
+                <h2>Оценим Готовоность Бизнеса</h2>
+                <p>Найдём неточёты и подскажем как исправить их!</p>
+            </div>
+        </section>
+        
+        <section class="advice">
+            <div class="text">
+                <h2>Проконсультируем по Юридическим Вопросам</h2>
+                <p>Расскажем какие документы заполнить, а также ответим на вопросы по законам РФ.</p>
+            </div>
+        </section>
+        
+
+        <!-- Голубой прямоугольник с кнопкой -->
+        <div class="cta-box">
+            <h2>Давай начнём?</h2>
+            <p>Нажмите, чтобы узнать больше о том, как мы можем помочь вам запустить бизнес.</p>
+            <button id="blue-button">Нажми</button>
+        </div>
+
+        <!-- Картинка клубники -->
+        <section class="strawberry-section">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg" class="strawberry" alt="Клубника">
+        </section>
+
+        <!-- Кнопки "Месяц" и "Год" -->
+        <section class="subscription">
+            <h2>Подписки</h2>
+            <button id="month-button" class="subscription-btn active">Месяц</button>
+            <button id="year-button" class="subscription-btn">Год</button>
+            <div id="subscription-content">
+                <div class="subscription-card">Описание месячной подписки</div>
+            </div>
+        </section>
+
+        <!-- Голубые карточки -->
+        <section class="cards-stack">
+            <div class="card">Один</div>
+            <div class="card">Два</div>
+            <div class="card">Три</div>
+            <div class="card">Четыре</div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="testimonials">
+            <div class="testimonial">
+                <img src="https://placekitten.com/50/50" class="user-photo" alt="Пользователь 1">
+                <p><strong>Иван:</strong> Отличный сервис!</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://placekitten.com/51/50" class="user-photo" alt="Пользователь 2">
+                <p><strong>Анна:</strong> Помогли с оформлением бизнеса.</p>
+            </div>
+        </section>
+
+        <!-- Контактная информация -->
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Свяжитесь с нами для консультации: example@example.com</p>
+        </section>
+    </main>
+
+    <!-- Скрипт для функциональности -->
+    <script>
+        // Меню гамбургер
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        const overlay = document.getElementById("overlay");
+        const button = document.getElementById("openModalBtn");
+
+        // Обработчик нажатия на кнопку
+        button.onclick = function() {
+            overlay.style.display = "flex"; // Показываем мутный экран с модальным окном
+        };
+
+        // Обработчик нажатия на мутный экран
+        overlay.onclick = function() {
+            overlay.style.display = "none"; // Скрываем экран
+        };
+
+
+
+        // Переключение подписок
+        document.getElementById('month-button').addEventListener('click', function() {
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">Описание месячной подписки</div>';
+            this.classList.add('active');
+            document.getElementById('year-button').classList.remove('active');
+        });
+
+        document.getElementById('year-button').addEventListener('click', function() {
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">Описание годовой подписки</div>';
+            this.classList.add('active');
+            document.getElementById('month-button').classList.remove('active');
+        });
+    </script>
+
+</body>
+</html>
