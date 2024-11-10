@@ -371,21 +371,24 @@
 
         // Переключение подписок
         document.getElementById('month-button').addEventListener('click', function() {
-            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">19,900 РУБ. НАВСЕГДА.</div>';
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription">19,900 РУБ. НАВСЕГДА.</div>';
             this.classList.add('active');
             document.getElementById('year-button').classList.remove('active');
+            document.getElementById('year1-button').classList.remove('active');
         });
 
         document.getElementById('year-button').addEventListener('click', function() {
-            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">10,000 РУБ. за 3 МЕСЯЦА.</div>';
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription">10,000 РУБ. за 3 МЕСЯЦА.</div>';
             this.classList.add('active');
             document.getElementById('month-button').classList.remove('active');
+            document.getElementById('year1-button').classList.remove('active');
         });
 
         document.getElementById('year1-button').addEventListener('click', function() {
-            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">3,000 РУБ. за ПОЛГОДА.</div>';
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription">3,000 РУБ. за ПОЛГОДА.</div>';
             this.classList.add('active');
             document.getElementById('month-button').classList.remove('active');
+            document.getElementById('year-button').classList.remove('active');
         });
     </script>
 
