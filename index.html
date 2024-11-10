@@ -326,13 +326,6 @@
             </div>
         </section>
 
-        <!-- Голубые карточки -->
-        <section class="cards-stack">
-            <div class="card">Один</div>
-            <div class="card">Два</div>
-            <div class="card">Три</div>
-            <div class="card">Четыре</div>
-        </section>
 
         <!-- Отзывы -->
         <section class="testimonials">
@@ -349,7 +342,7 @@
         <!-- Контактная информация -->
         <section class="contact">
             <h2>Contact Us</h2>
-            <p>Свяжитесь с нами для консультации: example@example.com</p>
+            <p>Свяжитесь с нами для консультации: tg: @ythaton</p>
         </section>
     </main>
 
@@ -378,13 +371,19 @@
 
         // Переключение подписок
         document.getElementById('month-button').addEventListener('click', function() {
-            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">Описание месячной подписки</div>';
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">19,900 РУБ. НАВСЕГДА.</div>';
             this.classList.add('active');
             document.getElementById('year-button').classList.remove('active');
         });
 
         document.getElementById('year-button').addEventListener('click', function() {
-            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">Описание годовой подписки</div>';
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">10,000 РУБ. за 3 МЕСЯЦА.</div>';
+            this.classList.add('active');
+            document.getElementById('month-button').classList.remove('active');
+        });
+
+        document.getElementById('year1-button').addEventListener('click', function() {
+            document.getElementById('subscription-content').innerHTML = '<div class="subscription-card">3,000 РУБ. за ПОЛГОДА.</div>';
             this.classList.add('active');
             document.getElementById('month-button').classList.remove('active');
         });
